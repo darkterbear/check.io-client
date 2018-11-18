@@ -12,11 +12,18 @@ export default class DashboardPage extends Component {
 			],
 			checkedInUsers: [
 				{ name: 'Your Mom ' },
-				{ name: 'Your Mom ' },
-				{ name: 'Your Mom ' }
+				{ name: 'My Mom ' },
+				{ name: 'Their Mom ' }
 			],
-			transactionHistory: []
+			transactionHistory: [],
+			search: ''
 		}
+	}
+
+	handleSearchChange = e => {
+		const value = e.target.value
+
+		this.setState({ search: value })
 	}
 
 	render() {
@@ -42,7 +49,11 @@ export default class DashboardPage extends Component {
 													<span className="icon">
 														<i className="fa fa-search" />
 													</span>
-													<input type="search" placeholder="Search" />
+													<input
+														type="search"
+														placeholder="Search"
+														onChange={this.handleSearchChange}
+													/>
 												</div>
 											</div>
 										</div>
@@ -56,9 +67,15 @@ export default class DashboardPage extends Component {
 												</div>
 												<div className=" row div-scroll">
 													<div className="col">
-														{this.state.nearbyUsers.map(u => {
-															return <Customer name={u.name} />
-														})}
+														{this.state.nearbyUsers
+															.filter(u =>
+																u.name
+																	.toLowerCase()
+																	.includes(this.state.search.toLowerCase())
+															)
+															.map(u => {
+																return <Customer name={u.name} />
+															})}
 													</div>
 												</div>
 											</div>
@@ -73,9 +90,15 @@ export default class DashboardPage extends Component {
 												</div>
 												<div className=" row div-scroll">
 													<div className="col">
-														{this.state.checkedInUsers.map(u => {
-															return <Customer name={u.name} />
-														})}
+														{this.state.checkedInUsers
+															.filter(u =>
+																u.name
+																	.toLowerCase()
+																	.includes(this.state.search.toLowerCase())
+															)
+															.map(u => {
+																return <Customer name={u.name} />
+															})}
 													</div>
 												</div>
 											</div>

@@ -76,12 +76,22 @@ export class Customer extends Component {
 						<div className="icon" />
 						<h3>{this.props.name}</h3>
 					</div>
-					<a
-						onClick={this.props.onCheckIn}
-						href="#"
-						style={{ cursor: 'pointer' }}>
-						check in
-					</a>
+					{this.props.onCheckIn && (
+						<a
+							onClick={this.props.onCheckIn}
+							href="#"
+							style={{ cursor: 'pointer' }}>
+							check in
+						</a>
+					)}
+					{this.props.onPay && (
+						<a
+							onClick={this.props.onPay}
+							href="#"
+							style={{ cursor: 'pointer' }}>
+							bill
+						</a>
+					)}
 				</div>
 			</div>
 		)

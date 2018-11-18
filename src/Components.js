@@ -70,7 +70,7 @@ export class MainNav extends Component {
 export class Customer extends Component {
 	render() {
 		return (
-			<div className="row">
+			<div className={'row' + (this.props.selected ? ' selected' : '')}>
 				<div className="col-12 col-name">
 					<div className="person">
 						<div className="icon" />

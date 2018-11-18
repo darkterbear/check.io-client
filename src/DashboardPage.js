@@ -15,15 +15,52 @@ export default class DashboardPage extends Component {
 				{ name: 'My Mom ' },
 				{ name: 'Their Mom ' }
 			],
-			transactionHistory: [],
-			search: ''
+			selectedTransaction: 0,
+			transactionHistory: [
+				{
+					customer: {
+						name: 'John Smith'
+					}
+				},
+				{
+					customer: {
+						name: 'Random Person'
+					}
+				},
+				{
+					customer: {
+						name: 'Meme Meme'
+					}
+				}
+			],
+			search: '',
+			historySearch: ''
 		}
+	}
+
+	componentDidMount() {
+		// TODO: get restaurant object and update state
 	}
 
 	handleSearchChange = e => {
 		const value = e.target.value
 
 		this.setState({ search: value })
+	}
+
+	handleHistorySearchChange = e => {
+		const value = e.target.value
+
+		this.setState({ historySearch: value })
+	}
+
+	handleCheckIn = userId => {
+		// TODO:
+	}
+
+	handlePay = userId => {
+		// TODO:
+		// get amount and description
 	}
 
 	render() {
@@ -74,7 +111,12 @@ export default class DashboardPage extends Component {
 																	.includes(this.state.search.toLowerCase())
 															)
 															.map(u => {
-																return <Customer name={u.name} />
+																return (
+																	<Customer
+																		name={u.name}
+																		onCheckIn={() => this.handleCheckIn(u._id)}
+																	/>
+																)
 															})}
 													</div>
 												</div>
@@ -97,7 +139,12 @@ export default class DashboardPage extends Component {
 																	.includes(this.state.search.toLowerCase())
 															)
 															.map(u => {
-																return <Customer name={u.name} />
+																return (
+																	<Customer
+																		name={u.name}
+																		onPay={this.handlePay}
+																	/>
+																)
 															})}
 													</div>
 												</div>
@@ -113,23 +160,37 @@ export default class DashboardPage extends Component {
 									<div className="consumer-container">
 										<div className="row">
 											<div className="col">
-												<input type="text" placeholder="Search.." />
+												<div className="search">
+													<span className="icon">
+														<i className="fa fa-search" />
+													</span>
+													<input
+														type="search"
+														placeholder="Search"
+														onChange={this.handleHistorySearchChange}
+													/>
+												</div>
 												<div className="row">
 													<div className="col">
 														<h2>History</h2>
 													</div>
 												</div>
-												{this.state.transactionHistory.forEach(transaction => {
-													return <Customer name={transaction.customer.name} />
-												})}
+												{this.state.transactionHistory
+													.filter(t =>
+														t.customer.name
+															.toLowerCase()
+															.includes(this.state.historySearch.toLowerCase())
+													)
+													.map((transaction, i) => {
+														return (
+															<Customer
+																name={transaction.customer.name}
+																selected={this.state.selectedTransaction === i}
+															/>
+														)
+													})}
 											</div>
-											<div className="col">
-												<div className="row">
-													<div className="col">
-														<h3>Cancel Payment</h3>
-													</div>
-												</div>
-												<hr />
+											<div className="col" style={{ marginTop: '4em' }}>
 												<div className="row">
 													<div className="col align-left">
 														<h3>Food Item</h3>
@@ -172,14 +233,6 @@ export default class DashboardPage extends Component {
 														<h3>+ $40.12</h3>
 														<h3 />
 														<h3>$441</h3>
-													</div>
-												</div>
-												<div className="row">
-													<div
-														className="col align-right"
-														style={{ display: 'inline-flex' }}>
-														<button>Physical Payment</button>
-														<button>Pay with Check.io</button>
 													</div>
 												</div>
 											</div>

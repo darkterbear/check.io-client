@@ -5,18 +5,7 @@ export default class LoginPage extends Component {
 		super(props)
 
 		this.state = {
-			page: 0,
-			loginEmail: '',
-			loginPassword: '',
-			registerEmail: '',
-			registerName: '',
-			registerLocationLon: '',
-			registerLocationLat: '',
-			registerPassword: '',
-			registerConfirmPassword: '',
-			registerCardNumber: '',
-			registerCardCVC: '',
-			registerCardDate: ''
+			page: 0
 		}
 	}
 
@@ -32,21 +21,22 @@ export default class LoginPage extends Component {
 	}
 
 	register = async () => {
-		// const date = this.state.registerCardDate.split('/')
+		const date = this.state.cardDate.split('/')
+
 		// const token = await createCard(
-		// 	this.state.registerCardNumber,
+		// 	this.state.cardNumber,
 		// 	date[0],
 		// 	date[1],
-		// 	this.state.registerCardCVC
+		// 	this.state.cardCVC
 		// )
 		// console.log(token)
 		// const response = await register(
-		// 	this.state.registerName,
-		// 	this.state.registerEmail,
-		// 	this.state.registerPassword,
+		// 	this.state.name,
+		// 	this.state.email,
+		// 	this.state.password,
 		// 	{
-		// 		lat: this.state.registerLocationLat,
-		// 		lon: this.state.registerLocationLon
+		// 		lat: this.state.lat,
+		// 		lon: this.state.lon
 		// 	},
 		// 	token
 		// )
@@ -64,43 +54,8 @@ export default class LoginPage extends Component {
 		this.setState({ page: 1 })
 	}
 
-	handleLoginEmailChange = e => {
-		this.setState({})
-	}
-
-	handleLoginEmailChange = e => {
-		this.setState({ loginEmail: e.target.value })
-	}
-	handleLoginPasswordChange = e => {
-		this.setState({ loginPassword: e.target.value })
-	}
-
-	handleRegEmailChange = e => {
-		this.setState({ registerEmail: e.target.value })
-	}
-	handleRegNameChange = e => {
-		this.setState({ registerName: e.target.value })
-	}
-	handleRegLatChange = e => {
-		this.setState({ registerLocationLat: e.target.value })
-	}
-	handleRegLonChange = e => {
-		this.setState({ registerLocationLon: e.target.value })
-	}
-	handleRegPasswordChange = e => {
-		this.setState({ registerPassword: e.target.value })
-	}
-	handleRegConfirmPasswordChange = e => {
-		this.setState({ registerConfirmPassword: e.target.value })
-	}
-	handleRegCardNumberChange = e => {
-		this.setState({ registerCardNumber: e.target.value })
-	}
-	handleRegCardCVCChange = e => {
-		this.setState({ registerCardCVC: e.target.value })
-	}
-	handleRegCardDateChange = e => {
-		this.setState({ registerCardDate: e.target.value })
+	handleInputChange = e => {
+		this.setState({ [e.target.name]: e.target.value })
 	}
 
 	render() {
@@ -119,11 +74,12 @@ export default class LoginPage extends Component {
 				<div className="container-fluid login-view">
 					<div className="row">
 						<div className="col-sm-6">
-							<div className="login">
+							<form className="login">
 								<h1>Sign In</h1>
 								<div className="form-group">
 									<input
-										onChange={this.handleLoginEmailChange}
+										onChange={this.handleInputChange}
+										name="loginEmail"
 										type="email"
 										className="form-control"
 										id="exampleInputEmail1"
@@ -133,7 +89,8 @@ export default class LoginPage extends Component {
 								</div>
 								<div className="form-group">
 									<input
-										onChange={this.handleLoginPasswordChange}
+										onChange={this.handleInputChange}
+										name="loginPassword"
 										type="password"
 										className="form-control"
 										id="exampleInputPassword1"
@@ -152,15 +109,16 @@ export default class LoginPage extends Component {
 										Sign Up
 									</a>
 								</p>
-							</div>
+							</form>
 						</div>
 						<div className="col-sm-6">
-							<div className="login">
+							<form className="login">
 								<h1>Sign up</h1>
 								<div className="form-group">
 									<input
 										type="email"
-										onChange={this.handleRegEmailChange}
+										name="email"
+										onChange={this.handleInputChange}
 										className="form-control"
 										id="exampleInputEmail1"
 										aria-describedby="emailHelp"
@@ -169,7 +127,8 @@ export default class LoginPage extends Component {
 								</div>
 								<div className="form-group">
 									<input
-										onChange={this.handleRegNameChange}
+										onChange={this.handleInputChange}
+										name="name"
 										type="username"
 										className="form-control"
 										id="exampleInputEmail1"
@@ -179,8 +138,9 @@ export default class LoginPage extends Component {
 								</div>
 								<div className="form-group">
 									<input
-										onChange={this.handleRegLonChange}
+										onChange={this.handleInputChange}
 										style={{ width: '45%', float: 'left' }}
+										name="lon"
 										type="number"
 										className="form-control"
 										id="exampleInputEmail1"
@@ -190,7 +150,8 @@ export default class LoginPage extends Component {
 									<input
 										style={{ width: '45%', float: 'left', marginLeft: '10%' }}
 										type="number"
-										onChange={this.handleRegLatChange}
+										name="lat"
+										onChange={this.handleInputChange}
 										className="form-control"
 										id="exampleInputEmail1"
 										aria-describedby="emailHelp"
@@ -199,8 +160,9 @@ export default class LoginPage extends Component {
 								</div>
 								<div className="form-group">
 									<input
-										onChange={this.handleRegPasswordChange}
+										onChange={this.handleInputChange}
 										type="password"
+										name="password"
 										className="form-control"
 										id="exampleInputPassword1"
 										placeholder="Password"
@@ -208,8 +170,9 @@ export default class LoginPage extends Component {
 								</div>
 								<div className="form-group">
 									<input
-										onChange={this.handleRegConfirmPasswordChange}
+										onChange={this.handleInputChange}
 										type="password"
+										name="confirmPassword"
 										className="form-control"
 										id="exampleInputPassword1"
 										placeholder="Confirm Password"
@@ -217,8 +180,9 @@ export default class LoginPage extends Component {
 								</div>
 								<div className="form-group">
 									<input
-										onChange={this.handleRegCardNumberChange}
+										onChange={this.handleInputChange}
 										type="password"
+										name="cardNumber"
 										className="form-control"
 										id="exampleInputPassword1"
 										placeholder="Card Number"
@@ -226,18 +190,20 @@ export default class LoginPage extends Component {
 								</div>
 								<div className="form-group">
 									<input
-										onChange={this.handleRegCardCVCChange}
+										onChange={this.handleInputChange}
 										style={{ width: '45%', float: 'left' }}
 										type="number"
+										name="cardCVC"
 										className="form-control"
 										id="exampleInputEmail1"
 										aria-describedby="emailHelp"
 										placeholder="CVC"
 									/>
 									<input
-										onChange={this.handleRegCardDateChange}
+										onChange={this.handleInputChange}
 										style={{ width: '45%', float: 'left', marginLeft: '10%' }}
 										type="text"
+										name="cardDate"
 										className="form-control"
 										id="exampleInputEmail1"
 										aria-describedby="emailHelp"
@@ -256,7 +222,7 @@ export default class LoginPage extends Component {
 										Sign In
 									</a>
 								</p>
-							</div>
+							</form>
 						</div>
 					</div>
 					<nav

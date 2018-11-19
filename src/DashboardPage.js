@@ -11,9 +11,9 @@ export default class DashboardPage extends Component {
 				{ name: 'Simon Zhang' }
 			],
 			checkedInUsers: [
-				{ name: 'Your Mom ' },
-				{ name: 'My Mom ' },
-				{ name: 'Their Mom ' }
+				{ name: 'John Smith ' },
+				{ name: 'Random Person ' },
+				{ name: 'Jacob Zhang' }
 			],
 			selectedTransaction: 0,
 			transactionHistory: [
@@ -34,12 +34,21 @@ export default class DashboardPage extends Component {
 				}
 			],
 			search: '',
-			historySearch: ''
+			historySearch: '',
+			billingCustomer: {},
+			billingAmount: 0
 		}
 	}
 
 	componentDidMount() {
 		// TODO: get restaurant object and update state
+	}
+
+	handleBillAmountChange = e => {
+		const value = e.target.value
+
+		if (isNaN(value)) this.setState({ billingAmount: 0 })
+		else this.setState({ billingAmount: parseInt(value) })
 	}
 
 	handleSearchChange = e => {
@@ -58,9 +67,16 @@ export default class DashboardPage extends Component {
 		// TODO:
 	}
 
-	handlePay = userId => {
+	handlePay = user => {
+		this.setState({ billingCustomer: user })
+	}
+
+	handleBillingClose = () => {
+		this.setState({ billingCustomer: {}, billingAmount: 0 })
+	}
+
+	handleBill = () => {
 		// TODO:
-		// get amount and description
 	}
 
 	render() {
@@ -142,7 +158,7 @@ export default class DashboardPage extends Component {
 																return (
 																	<Customer
 																		name={u.name}
-																		onPay={this.handlePay}
+																		onPay={() => this.handlePay(u)}
 																	/>
 																)
 															})}
@@ -244,6 +260,77 @@ export default class DashboardPage extends Component {
 						</div>
 					</div>
 				</div>
+
+				<div
+					class="modal "
+					id="payment-modal"
+					tabindex="-1"
+					role="dialog"
+					aria-labelledby="exampleModalCenterTitle"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle">
+									Billing {this.state.billingCustomer.name}
+								</h5>
+								<button
+									type="button"
+									class="close"
+									data-dismiss="modal"
+									onClick={this.handleBillingClose}
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="row">
+										{/* <div class="col-md-6">.col-md-4</div>
+                    <div class="col-md-6 ml-auto">.col-md-4 .ml-auto</div> */}
+										<div class="form-group">
+											<input
+												type="number"
+												className="form-control"
+												placeholder="Amount"
+												onChange={this.handleBillAmountChange}
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button
+									type="button"
+									class="btn btn-transparent-a"
+									onClick={this.handleBillingClose}
+									data-dismiss="modal">
+									Close
+								</button>
+								<button
+									type="button"
+									onClick={this.handleBill}
+									class="btn btn-brand">
+									Save
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				{/* <nav>
+					class="footer navbar navbar-big fixed-bottom" style=
+					{{ background: 'transparent' }}>
+					<p class="grey">Copyright Big Peen Boys MMXVIII</p>
+					<p>
+						Made with <span class="accent">❤</span> at Hacksgiving 2018
+					</p>
+					<p class="grey">
+						Need Help?{' '}
+						<a class="accent" href="#">
+							Contact Us
+						</a>
+					</p>
+				</nav> */}
 			</div>
 		)
 	}

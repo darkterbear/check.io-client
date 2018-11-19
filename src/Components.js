@@ -85,13 +85,6 @@ export class Customer extends Component {
 						</a>
 					)}
 					{this.props.onPay && (
-						// <a
-						// 	onClick={this.props.onPay}
-						// 	href="#"
-						// 	style={{ cursor: 'pointer' }}>
-						// 	bill
-						// </a>
-
 						<a
 							href=""
 							onClick={this.props.onPay}

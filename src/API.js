@@ -10,66 +10,39 @@ const POST_HEADERS = {
 	'Content-Type': 'application/json'
 }
 
-exports.login = (email, password) => {
-	return fetch(BASE_URL + '/restaurant/login', {
+const post = (path, body) => {
+	return fetch(BASE_URL + path, {
 		method: 'POST',
 		headers: POST_HEADERS,
-		body: JSON.stringify({
-			email,
-			password
-		}),
+		body: JSON.stringify(body),
 		credentials: 'include'
 	})
 }
 
+exports.login = (email, password) => {
+	return post('/restaurant/login', { email, password })
+}
+
 exports.register = (name, email, password, location, accountToken) => {
-	return fetch(BASE_URL + '/restaurant/register', {
-		method: 'POST',
-		headers: POST_HEADERS,
-		body: JSON.stringify({
-			name,
-			email,
-			password,
-			location,
-			accountToken
-		}),
-		credentials: 'include'
+	return post('/restaurant/register', {
+		name,
+		email,
+		password,
+		location,
+		accountToken
 	})
 }
 
 exports.checkInUser = userId => {
-	return fetch(BASE_URL + '/restaurant/check-in-user', {
-		method: 'POST',
-		headers: POST_HEADERS,
-		body: JSON.stringify({
-			userId
-		}),
-		credentials: 'include'
-	})
+	return post('/restaurant/check-in-user', { userId })
 }
 
 exports.checkOutUser = userId => {
-	return fetch(BASE_URL + '/restaurant/check-out-user', {
-		method: 'POST',
-		headers: POST_HEADERS,
-		body: JSON.stringify({
-			userId
-		}),
-		credentials: 'include'
-	})
+	return post('/restaurant/check-out-user', { userId })
 }
 
 exports.billUser = (userId, amount) => {
-	return fetch(BASE_URL + '/restaurant/bill-user', {
-		method: 'POST',
-		headers: POST_HEADERS,
-		body: JSON.stringify({
-			userId,
-			amount,
-			description: ''
-		}),
-		credentials: 'include'
-	})
+	return post('/restaurant/bill-user', { userId, amount, description: '' })
 }
 
 exports.getRestaurant = () => {

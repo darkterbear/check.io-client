@@ -1,53 +1,5 @@
 import React, { Component } from 'react'
 import { login, register } from './API'
-import { request } from 'http'
-import base64 from 'base-64'
-
-const createCard = async (cardNumber, month, year, cvc) => {
-	var dataString =
-		'card[number]=' +
-		cardNumber +
-		'&card[exp_month]=' +
-		month +
-		'&card[exp_year]=' +
-		year +
-		'&card[cvc]=' +
-		cvc
-
-	var headers = new Headers()
-
-	headers.append('Content-Type', 'application/json')
-	headers.append(
-		'Authorization',
-		'Basic' + base64.encode('sk_test_K2UOZ9A6kKiPBQzEgPfmKuWG' + ':' + '')
-	)
-
-	return fetch('https://api.stripe.com/v1/tokens', {
-		method: 'POST',
-		headers,
-		body: dataString,
-		credentials: 'include'
-	})
-
-	new Promise(async (resolve, reject) => {
-		var options = {
-			hostname: 'https://api.stripe.com',
-			path: '/v1/tokens',
-			method: 'POST',
-			body: dataString,
-			auth: {
-				user: 'sk_test_K2UOZ9A6kKiPBQzEgPfmKuWG',
-				pass: ''
-			}
-		}
-
-		fetch()
-		request(options, res => {
-			console.log(res)
-		})
-	})
-}
-
 export default class LoginPage extends Component {
 	constructor(props) {
 		super(props)
@@ -80,33 +32,28 @@ export default class LoginPage extends Component {
 	}
 
 	register = async () => {
-		const date = this.state.registerCardDate.split('/')
-
-		const token = await createCard(
-			this.state.registerCardNumber,
-			date[0],
-			date[1],
-			this.state.registerCardCVC
-		)
-
-		console.log(token)
-
-		const response = await register(
-			this.state.registerName,
-			this.state.registerEmail,
-			this.state.registerPassword,
-			{
-				lat: this.state.registerLocationLat,
-				lon: this.state.registerLocationLon
-			},
-			token
-		)
-
-		console.log(response)
-
-		if (response.status === 200) {
-			this.props.history.push('/dashboard')
-		}
+		// const date = this.state.registerCardDate.split('/')
+		// const token = await createCard(
+		// 	this.state.registerCardNumber,
+		// 	date[0],
+		// 	date[1],
+		// 	this.state.registerCardCVC
+		// )
+		// console.log(token)
+		// const response = await register(
+		// 	this.state.registerName,
+		// 	this.state.registerEmail,
+		// 	this.state.registerPassword,
+		// 	{
+		// 		lat: this.state.registerLocationLat,
+		// 		lon: this.state.registerLocationLon
+		// 	},
+		// 	token
+		// )
+		// console.log(response)
+		// if (response.status === 200) {
+		// 	this.props.history.push('/dashboard')
+		// }
 	}
 
 	handleLoginPage = () => {

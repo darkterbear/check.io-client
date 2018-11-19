@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import DashboardPage from './DashboardPage'
 import LoginPage from './LoginPage'
-import { Elements } from 'react-stripe-elements'
 import HomePage from './HomePage'
 
 export default class App extends Component {

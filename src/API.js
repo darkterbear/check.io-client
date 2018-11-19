@@ -2,13 +2,18 @@ const BASE_URL = 'https://b04901b8.ngrok.io'
 
 exports.BASE_URL = BASE_URL
 
+const GET_HEADERS = {
+	Accept: 'application/json'
+}
+const POST_HEADERS = {
+	Accept: 'application/json',
+	'Content-Type': 'application/json'
+}
+
 exports.login = (email, password) => {
 	return fetch(BASE_URL + '/restaurant/login', {
 		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json'
-		},
+		headers: POST_HEADERS,
 		body: JSON.stringify({
 			email,
 			password
@@ -20,10 +25,7 @@ exports.login = (email, password) => {
 exports.register = (name, email, password, location, accountToken) => {
 	return fetch(BASE_URL + '/restaurant/register', {
 		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json'
-		},
+		headers: POST_HEADERS,
 		body: JSON.stringify({
 			name,
 			email,
@@ -38,10 +40,7 @@ exports.register = (name, email, password, location, accountToken) => {
 exports.checkInUser = userId => {
 	return fetch(BASE_URL + '/restaurant/check-in-user', {
 		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json'
-		},
+		headers: POST_HEADERS,
 		body: JSON.stringify({
 			userId
 		}),
@@ -52,10 +51,7 @@ exports.checkInUser = userId => {
 exports.checkOutUser = userId => {
 	return fetch(BASE_URL + '/restaurant/check-out-user', {
 		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json'
-		},
+		headers: POST_HEADERS,
 		body: JSON.stringify({
 			userId
 		}),
@@ -66,10 +62,7 @@ exports.checkOutUser = userId => {
 exports.billUser = (userId, amount) => {
 	return fetch(BASE_URL + '/restaurant/bill-user', {
 		method: 'POST',
-		headers: {
-			Accept: 'application/json',
-			'Content-Type': 'application/json'
-		},
+		headers: POST_HEADERS,
 		body: JSON.stringify({
 			userId,
 			amount,
@@ -82,9 +75,7 @@ exports.billUser = (userId, amount) => {
 exports.getRestaurant = () => {
 	return fetch(BASE_URL + '/restaurant/get', {
 		method: 'GET',
-		headers: {
-			Accept: 'application/json'
-		},
+		headers: GET_HEADERS,
 		credentials: 'include'
 	})
 }

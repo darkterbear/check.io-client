@@ -1,4 +1,4 @@
-const BASE_URL = 'https://eecf2d03.ngrok.io'
+const BASE_URL = 'https://8e9af041.ngrok.io'
 
 exports.BASE_URL = BASE_URL
 

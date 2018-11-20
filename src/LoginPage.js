@@ -39,9 +39,9 @@ export default class LoginPage extends Component {
 
 		console.log(response)
 
-		// if (response.status === 200) {
-		// 	this.props.history.push('/dashboard')
-		// }
+		if (response.status === 200) {
+			this.props.history.push('/dashboard')
+		}
 	}
 
 	handleLoginPage = () => {

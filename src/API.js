@@ -1,4 +1,4 @@
-const BASE_URL = 'https://b04901b8.ngrok.io'
+const BASE_URL = 'https://eecf2d03.ngrok.io'
 
 exports.BASE_URL = BASE_URL
 
@@ -23,13 +23,25 @@ exports.login = (email, password) => {
 	return post('/restaurant/login', { email, password })
 }
 
-exports.register = (name, email, password, location, accountToken) => {
+exports.register = (
+	name,
+	email,
+	password,
+	location,
+	cardNumber,
+	month,
+	year,
+	cvc
+) => {
 	return post('/restaurant/register', {
 		name,
 		email,
 		password,
 		location,
-		accountToken
+		cardNumber,
+		month,
+		year,
+		cvc
 	})
 }
 

@@ -23,24 +23,22 @@ export default class LoginPage extends Component {
 	register = async () => {
 		const date = this.state.cardDate.split('/')
 
-		// const token = await createCard(
-		// 	this.state.cardNumber,
-		// 	date[0],
-		// 	date[1],
-		// 	this.state.cardCVC
-		// )
-		// console.log(token)
-		// const response = await register(
-		// 	this.state.name,
-		// 	this.state.email,
-		// 	this.state.password,
-		// 	{
-		// 		lat: this.state.lat,
-		// 		lon: this.state.lon
-		// 	},
-		// 	token
-		// )
-		// console.log(response)
+		const response = await register(
+			this.state.name,
+			this.state.email,
+			this.state.password,
+			{
+				lat: this.state.lat,
+				lon: this.state.lon
+			},
+			this.state.cardNumber,
+			date[0],
+			date[1],
+			this.state.cardCVC
+		)
+
+		console.log(response)
+
 		// if (response.status === 200) {
 		// 	this.props.history.push('/dashboard')
 		// }

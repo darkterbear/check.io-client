@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { Header, MainNav, Customer, SettingsPane, Button } from '../Components'
+import {
+	Header,
+	MainNav,
+	Customer,
+	SettingsPane,
+	Button,
+	FullFooter
+} from '../Components'
 import PaymentPane from './PaymentPane'
 import CustomerPane from './CustomerPane'
 
@@ -33,22 +40,7 @@ export default class DashboardPage extends Component {
 					</div>
 				</div>
 
-				<nav
-					className="footer navbar navbar-big fixed-bottom"
-					style={{ background: 'transparent' }}>
-					<p class="grey">
-						Copyright Young Dumb Broke High School Kids MMXVIII
-					</p>
-					<p>
-						Made with <span class="accent">❤</span> at Hacksgiving 2018
-					</p>
-					<p class="grey">
-						Need Help?{' '}
-						<a class="accent" href="#">
-							Contact Us
-						</a>
-					</p>
-				</nav>
+				<FullFooter />
 			</div>
 		)
 	}

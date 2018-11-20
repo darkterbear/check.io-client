@@ -164,3 +164,72 @@ export class Button extends Component {
 		)
 	}
 }
+
+export class FullFooter extends Component {
+	render() {
+		return (
+			<nav
+				className="footer navbar navbar-big fixed-bottom"
+				style={{ background: 'transparent' }}>
+				<p class="grey">Copyright Young Dumb Broke High School Kids MMXVIII</p>
+				<p>
+					Made with <span class="accent">❤</span> at Hacksgiving 2018
+				</p>
+				<p class="grey">
+					Need Help?{' '}
+					<a class="accent" href="#">
+						Contact Us
+					</a>
+				</p>
+			</nav>
+		)
+	}
+}
+
+export class Modal extends Component {
+	render() {
+		return (
+			<div
+				class="modal "
+				id="payment-modal"
+				tabindex="-1"
+				role="dialog"
+				aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalCenterTitle">
+								{this.props.title}
+							</h5>
+							<button
+								type="button"
+								class="close"
+								data-dismiss="modal"
+								onClick={this.props.onClose}
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">{this.props.children}</div>
+						<div class="modal-footer">
+							<button
+								type="button"
+								class="btn btn-transparent-a"
+								onClick={this.props.onClose}
+								data-dismiss="modal">
+								Close
+							</button>
+							<button
+								type="button"
+								onClick={this.props.onConfirm}
+								class="btn btn-brand">
+								Save
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}

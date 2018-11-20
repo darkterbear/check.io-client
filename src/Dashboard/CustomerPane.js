@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Customer, Button } from '../Components'
+import { Customer, Button, Modal } from '../Components'
 
 export default class CustomerPane extends Component {
 	constructor(props) {
@@ -127,62 +127,23 @@ export default class CustomerPane extends Component {
 						</div>
 					</div>
 				</div>
-				<div
-					class="modal "
-					id="payment-modal"
-					tabindex="-1"
-					role="dialog"
-					aria-labelledby="exampleModalCenterTitle"
-					aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalCenterTitle">
-									Billing {this.state.billingCustomer.name}
-								</h5>
-								<button
-									type="button"
-									class="close"
-									data-dismiss="modal"
-									onClick={this.handleBillingClose}
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<div class="container-fluid">
-									<div class="row">
-										{/* <div class="col-md-6">.col-md-4</div>
-                    <div class="col-md-6 ml-auto">.col-md-4 .ml-auto</div> */}
-										<div class="form-group">
-											<input
-												type="number"
-												className="form-control"
-												placeholder="Amount"
-												onChange={this.handleBillAmountChange}
-											/>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button
-									type="button"
-									class="btn btn-transparent-a"
-									onClick={this.handleBillingClose}
-									data-dismiss="modal">
-									Close
-								</button>
-								<button
-									type="button"
-									onClick={this.handleBill}
-									class="btn btn-brand">
-									Save
-								</button>
+				<Modal
+					title={'Billing: ' + this.state.billingCustomer.name}
+					onClose={() => {}}
+					onConfirm={() => {}}>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="form-group">
+								<input
+									type="number"
+									className="form-control"
+									placeholder="Amount"
+									onChange={this.handleBillAmountChange}
+								/>
 							</div>
 						</div>
 					</div>
-				</div>
+				</Modal>
 			</div>
 		)
 	}

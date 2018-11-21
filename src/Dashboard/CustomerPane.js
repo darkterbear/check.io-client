@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
 import { Customer, Button, Modal } from '../Components'
+import { getRestaurant } from '../API'
 
 export default class CustomerPane extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			nearbyUsers: [
-				{ name: 'Terrance Li' },
-				{ name: 'Owen Cheung' },
-				{ name: 'Simon Zhang' }
-			],
-			checkedInUsers: [
-				{ name: 'John Smith ' },
-				{ name: 'Random Person ' },
-				{ name: 'Jacob Zhang' }
-			],
 			search: '',
 			billingCustomer: {},
 			billingAmount: 0
@@ -82,20 +73,21 @@ export default class CustomerPane extends Component {
 							</div>
 							<div className=" row div-scroll">
 								<div className="col">
-									{this.state.nearbyUsers
-										.filter(u =>
-											u.name
-												.toLowerCase()
-												.includes(this.state.search.toLowerCase())
-										)
-										.map(u => {
-											return (
-												<Customer
-													name={u.name}
-													onCheckIn={() => this.handleCheckIn(u._id)}
-												/>
+									{this.props.nearbyUsers &&
+										this.props.nearbyUsers
+											.filter(u =>
+												u.name
+													.toLowerCase()
+													.includes(this.state.search.toLowerCase())
 											)
-										})}
+											.map(u => {
+												return (
+													<Customer
+														name={u.name}
+														onCheckIn={() => this.handleCheckIn(u._id)}
+													/>
+												)
+											})}
 								</div>
 							</div>
 						</div>
@@ -103,25 +95,32 @@ export default class CustomerPane extends Component {
 							<div className="row">
 								<div className="col col-name">
 									<h2>Checked In</h2>
-									<h4>Occupancy: {this.state.checkedInUsers.length}/20</h4>
+									<h4>
+										Occupancy:{' '}
+										{this.props.checkedInUsers
+											? this.props.checkedInUsers.length
+											: 0}
+										/20
+									</h4>
 								</div>
 							</div>
 							<div className=" row div-scroll">
 								<div className="col">
-									{this.state.checkedInUsers
-										.filter(u =>
-											u.name
-												.toLowerCase()
-												.includes(this.state.search.toLowerCase())
-										)
-										.map(u => {
-											return (
-												<Customer
-													name={u.name}
-													onPay={() => this.handlePay(u)}
-												/>
+									{this.props.checkedInUsers &&
+										this.props.checkedInUsers
+											.filter(u =>
+												u.name
+													.toLowerCase()
+													.includes(this.state.search.toLowerCase())
 											)
-										})}
+											.map(u => {
+												return (
+													<Customer
+														name={u.name}
+														onPay={() => this.handlePay(u)}
+													/>
+												)
+											})}
 								</div>
 							</div>
 						</div>

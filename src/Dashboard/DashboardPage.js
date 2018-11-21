@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import {
-	Header,
-	MainNav,
-	Customer,
-	SettingsPane,
-	Button,
-	FullFooter
-} from '../Components'
+import { Header, MainNav, Customer, Button, FullFooter } from '../Components'
 import PaymentPane from './PaymentPane'
 import CustomerPane from './CustomerPane'
+import SettingsPane from './SettingsPane'
+import { getRestaurant } from '../API'
 
 export default class DashboardPage extends Component {
 	constructor(props) {
@@ -16,8 +11,18 @@ export default class DashboardPage extends Component {
 		this.state = {}
 	}
 
-	componentDidMount() {
-		// TODO: get restaurant object and update state
+	async componentDidMount() {
+		const response = await getRestaurant()
+
+		if (response.status === 200) {
+			const data = await response.json()
+
+			this.setState({
+				nearbyUsers: data.nearbyUsers,
+				checkedInUsers: data.checkedInUsers,
+				transactionHistory: data.transactionHistory
+			})
+		}
 	}
 
 	render() {
@@ -32,8 +37,13 @@ export default class DashboardPage extends Component {
 							<div
 								className="container section border tab-content"
 								id="pills-tabContent">
-								<CustomerPane />
-								<PaymentPane />
+								<CustomerPane
+									nearbyUsers={this.state.nearbyUsers}
+									checkedInUsers={this.state.checkedInUsers}
+								/>
+								<PaymentPane
+									transactionHistory={this.state.transactionHistory}
+								/>
 								<SettingsPane />
 							</div>
 						</div>

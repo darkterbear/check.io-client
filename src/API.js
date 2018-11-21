@@ -1,4 +1,4 @@
-const BASE_URL = 'https://8e9af041.ngrok.io'
+const BASE_URL = 'http://localhost:3001'
 
 exports.BASE_URL = BASE_URL
 

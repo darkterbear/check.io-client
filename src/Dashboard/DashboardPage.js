@@ -4,14 +4,29 @@ import PaymentPane from './PaymentPane'
 import CustomerPane from './CustomerPane'
 import SettingsPane from './SettingsPane'
 import { getRestaurant } from '../API'
+import Socket from '../Sockets'
 
 export default class DashboardPage extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			nearbyUsers: []
+		}
 	}
 
 	async componentDidMount() {
+		Socket.subscribeUserNearby(user => {
+			this.setState({ nearbyUsers: this.state.nearbyUsers.concat(user) })
+		})
+
+		Socket.subscribeUserLeft(user => {
+			this.setState({
+				nearbyUsers: this.state.nearbyUsers.filter(
+					u => u._id.toString() !== user._id.toString()
+				)
+			})
+		})
+
 		const response = await getRestaurant()
 
 		if (response.status === 200) {

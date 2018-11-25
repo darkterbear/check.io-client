@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Customer, Button, Modal } from '../Components'
 import { getRestaurant } from '../API'
+import Socket from '../Sockets'
 
 export default class CustomerPane extends Component {
 	constructor(props) {
